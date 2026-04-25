@@ -1,0 +1,45 @@
+seed: 42
+
+model:
+  text_model_name: google/long-t5-tglobal-base
+  vision_model_name: google/vit-base-patch16-224
+
+  memorizer_max_input_length: 16384
+  retriever_max_input_length: 512
+  max_target_length: 128
+
+  dropout: 0.1
+  freeze_vision_encoder: false
+
+  use_adapters: true
+  num_adapters: 1
+  adapter_bottleneck_size: 64
+  adapter_dropout: 0.1
+  initialize_retriever_from_memorizer: true
+  num_beams: 20
+  num_return_sequences: 20
+
+
+training:
+  batch_size: 1
+  learning_rate: 3.0e-5
+  weight_decay: 0.01
+  num_epochs: 5
+  gradient_accumulation_steps: 8
+  max_grad_norm: 1.0
+  num_workers: 4
+  log_steps: 50
+  save_steps: 1000
+  eval_batch_size: 1
+
+loss:
+  distill_weight: 1.0
+  replay_weight: 1.0
+  temperature: 2.0
+
+paths:
+  train_file: data/processed/train.jsonl
+  valid_file: data/processed/valid.jsonl
+  test_file: data/processed/test.jsonl
+  image_dir: data/images
+  output_dir: outputs

@@ -1,0 +1,9 @@
+torch
+transformers
+pillow
+tqdm
+pyyaml
+numpy
+scikit-learn
+yake
+accelerate
